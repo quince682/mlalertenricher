@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wazuh Alert Triage - Configuration</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Navigation</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="/" class="sidebar-link active">Elasticsearch Config</a></li>
+                <li><a href="/mappings-ui" class="sidebar-link">Agent-User Mappings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Intelligent Wazuh Alert Triage System</h1>
+                <p>Configure the connection to your Elasticsearch cluster.</p>
+            </header>
+
+            <main>
+            <div class="connection-options">
+                <div class="option" id="option-no-security" data-form="form-no-security">
+                    <div class="option-title">No Security</div>
+                    <p>Connect using Host and Port only.</p>
+                </div>
+                <div class="option" id="option-ssl" data-form="form-ssl">
+                    <div class="option-title">SSL/TLS Security</div>
+                    <p>Connect using Username and Password.</p>
+                </div>
+                <div class="option" id="option-api-key" data-form="form-api-key">
+                    <div class="option-title">API Key</div>
+                    <p>Connect using a secure API Key.</p>
+                </div>
+            </div>
+
+            <form id="config-form">
+                <!-- Form for No Security -->
+                <div id="form-no-security" class="form-section">
+                    <div class="form-group">
+                        <label for="host-no-security">Elasticsearch Host</label>
+                        <input type="text" id="host-no-security" name="host" placeholder="e.g., 192.168.1.100">
+                    </div>
+                    <div class="form-group">
+                        <label for="port-no-security">Port</label>
+                        <input type="number" id="port-no-security" name="port" placeholder="e.g., 9200">
+                    </div>
+                </div>
+
+                <!-- Form for SSL/TLS Security -->
+                <div id="form-ssl" class="form-section" style="display:none;">
+                    <div class="form-group">
+                        <label for="host-ssl">Elasticsearch Host</label>
+                        <input type="text" id="host-ssl" name="host" placeholder="e.g., my-secure-es.com">
+                    </div>
+                     <div class="form-group">
+                        <label for="port-ssl">Port</label>
+                        <input type="number" id="port-ssl" name="port" value="9200" placeholder="e.g., 9200">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                </div>
+
+                <!-- Form for API Key -->
+                <div id="form-api-key" class="form-section" style="display:none;">
+                    <div class="form-group">
+                        <label for="host-api">Elasticsearch Host</label>
+                        <input type="text" id="host-api" name="host" placeholder="e.g., https://my-cloud-es:9243">
+                    </div>
+                    <div class="form-group">
+                        <label for="api_key">API Key</label>
+                        <input type="password" id="api_key" name="api_key" placeholder="Enter your Elasticsearch API Key">
+                    </div>
+                </div>
+                
+                <input type="hidden" id="auth_method" name="auth_method" value="no_security">
+                <button type="submit" id="submit-btn">Save Configuration</button>
+            </form>
+            <div id="status-message"></div>
+        </main>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

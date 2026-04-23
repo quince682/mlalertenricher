@@ -1,0 +1,17 @@
+services:
+  python-fastapi_app:
+    build:
+      context: ./fastapi_app
+      dockerfile: Dockerfile
+    container_name: python-fastapi_app
+    restart: unless-stopped
+    init: true
+    ports:
+      - "8000:8000"  # Expose FastAPI app on port 8000
+    # env_file: ./fastapi_app/.env  # Uncomment if .env file exists
+    working_dir: /app
+    # No external dependencies detected (database, cache, etc.)
+    # No volumes configured as the app does not require persistent storage
+    # Runs as non-root user as per Dockerfile
+
+# No networks section needed as there is only one service and no inter-service communication

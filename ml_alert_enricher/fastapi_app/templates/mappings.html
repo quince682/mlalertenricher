@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wazuh Alert Triage - Agent-User Mappings</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Navigation</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="/" class="sidebar-link">Elasticsearch Config</a></li>
+                <li><a href="/mappings-ui" class="sidebar-link active">Agent-User Mappings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Agent-User Mappings</h1>
+                <p>Manage mappings between Wazuh agents and Okta users for alert enrichment.</p>
+            </header>
+
+            <main>
+                <!-- Add/Edit Form -->
+                <div class="form-section">
+                    <h2 id="form-title">Add New Mapping</h2>
+                    <form id="mapping-form">
+                        <div class="form-group">
+                            <label for="okta_user_email">Okta User Email</label>
+                            <input type="email" id="okta_user_email" name="okta_user_email" required placeholder="user@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="wazuh_agent_id">Wazuh Agent ID</label>
+                            <input type="text" id="wazuh_agent_id" name="wazuh_agent_id" required placeholder="001">
+                        </div>
+                        <div class="form-group">
+                            <label for="cloud_pc_id">Cloud PC ID (Optional)</label>
+                            <input type="text" id="cloud_pc_id" name="cloud_pc_id" placeholder="PC-12345">
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="is_vip" name="is_vip">
+                                VIP User
+                            </label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" id="submit-btn">Add Mapping</button>
+                            <button type="button" id="cancel-btn" style="display:none;">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Mappings Table -->
+                <div class="table-section">
+                    <h2>Existing Mappings</h2>
+                    <div class="table-container">
+                        <table id="mappings-table">
+                            <thead>
+                                <tr>
+                                    <th>Agent ID</th>
+                                    <th>Okta User Email</th>
+                                    <th>Cloud PC ID</th>
+                                    <th>VIP</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mappings-tbody">
+                                <!-- Mappings will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Status Message -->
+                <div id="status-message"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Mapping</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit_agent_id" name="agent_id">
+                <div class="form-group">
+                    <label for="edit_okta_user_email">Okta User Email</label>
+                    <input type="email" id="edit_okta_user_email" name="okta_user_email" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_cloud_pc_id">Cloud PC ID (Optional)</label>
+                    <input type="text" id="edit_cloud_pc_id" name="cloud_pc_id">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="edit_is_vip" name="is_vip">
+                        VIP User
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Update Mapping</button>
+                    <button type="button" id="edit-cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/mappings.js"></script>
+</body>
+</html>

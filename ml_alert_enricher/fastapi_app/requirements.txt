@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+numpy
+scikit-learn==1.6.1
+python-multipart
+elasticsearch
+aiohttp
+pydantic
+jinja2
+aiofiles 
+pandas
+joblib
