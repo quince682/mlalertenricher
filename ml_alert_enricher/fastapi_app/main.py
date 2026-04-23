@@ -402,4 +402,4 @@ async def mappings_ui(request: Request):
     Returns:
         HTML page for managing agent-user mappings
     """
-    return templates.TemplateResponse("mappings.html", {"request": request})
+    return templates.TemplateResponse(request, "mappings.html", {"request": request})
